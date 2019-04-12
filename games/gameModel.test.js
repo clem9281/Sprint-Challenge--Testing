@@ -5,6 +5,9 @@ describe('gameModel', () => {
     afterEach(async () => {
         await db('games').truncate();
     })
+    beforeEach(async () => {
+        await db('games').truncate();
+    })
     describe("find", () => {
         it("should return an array", async () => {
             const games = await dbHelpers.find();
@@ -37,6 +40,31 @@ describe('gameModel', () => {
             });
             const game = await dbHelpers.findBy({ title: 'Galaga' });
             expect(game).toEqual([{ id: 1, title: "Galaga", genre: "Arcade", releaseYear: null }]);
+        })
+    })
+    describe("remove", () => {
+        it("should remove an object from the database", async () => {
+            await dbHelpers.insert({
+                title: "Galaga", genre: "Arcade"
+            });
+            await dbHelpers.insert({
+                title: "Mario", genre: "Scroller"
+            });
+            await dbHelpers.remove(1);
+            const games = await dbHelpers.find();
+            expect(games).toEqual([{ id: 2, title: "Mario", genre: "Scroller", releaseYear: null }]);
+        })
+        it("should return 1 if it deleted something", async () => {
+            await dbHelpers.insert({
+                title: "Galaga", genre: "Arcade"
+            });
+            const deleted = await dbHelpers.remove(1);
+            expect(deleted).toBe(1);
+        })
+        it("should return 0 if it didn't delete something", async () => {
+            const deleted = await dbHelpers.remove(1);
+            console.log(deleted);
+            expect(deleted).toBe(0);
         })
     })
 })

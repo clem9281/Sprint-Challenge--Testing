@@ -12,6 +12,10 @@ const insert = (newGame) => {
     return db('games').insert(newGame);
 }
 
+const remove = (id) => {
+    return db('games').where({ id }).del();
+}
+
 module.exports = {
-    find, findBy, insert
+    find, findBy, insert, remove
 }

@@ -30,7 +30,7 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 1. What is the point of `Test Driven Development`? What do you think about this approach?
 
-    In test driven development you write the tests before you write the code that you want to test. This way you can ensure the code you are writing meets the requirements for your project. It takes more time to write the tests initially, but they help insure you don't add any breaking changes.
+    In test driven development you write the tests before you write the code that you want to test. This way you can ensure the code you are writing meets the requirements for your project. It takes more time to write the tests initially, but it protects your application from breaking changes.
 
 1. Mention three types of automated tests.
 
