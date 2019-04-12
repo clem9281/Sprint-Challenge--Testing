@@ -5,7 +5,7 @@ const find = () => {
 }
 
 const findBy = filter => {
-
+    return db('games').where(filter)
 }
 
 const insert = (newGame) => {

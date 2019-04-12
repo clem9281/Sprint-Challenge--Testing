@@ -2,6 +2,9 @@ const db = require('../data/dbConfig');
 const dbHelpers = require('./gameModel');
 
 describe('gameModel', () => {
+    afterEach(async () => {
+        await db('games').truncate();
+    })
     describe("find", () => {
         it("should return an array", async () => {
             const games = await dbHelpers.find();
@@ -9,9 +12,6 @@ describe('gameModel', () => {
         })
     })
     describe("insert", () => {
-        afterEach(async () => {
-            await db('games').truncate();
-        })
         it("should add an entry to the database", async () => {
             await dbHelpers.insert({
                 title: "Galaga", genre: "Arcade"
@@ -28,6 +28,15 @@ describe('gameModel', () => {
                 title: "Mario", genre: "Scroller"
             });
             expect(addedSecond).toEqual([2]);
+        })
+    })
+    describe("findBy", () => {
+        it("should return an array whose only element is the object with the given filter", async () => {
+            await dbHelpers.insert({
+                title: "Galaga", genre: "Arcade"
+            });
+            const game = await dbHelpers.findBy({ title: 'Galaga' });
+            expect(game).toEqual([{ id: 1, title: "Galaga", genre: "Arcade", releaseYear: null }]);
         })
     })
 })
