@@ -39,7 +39,7 @@ describe("gameRoutes /api/games", () => {
                 title: "Galaga", genre: "Arcade", id: 1, releaseYear: null
             }])
         })
-        it.skip("should the game created", async () => {
+        it("should the game created", async () => {
             const game = await request(app).post('/api/games').send({
                 title: "Galaga", genre: "Arcade"
             });
