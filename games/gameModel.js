@@ -8,8 +8,8 @@ const findBy = filter => {
 
 }
 
-const insert = () => {
-
+const insert = (newGame) => {
+    return db('games').insert(newGame);
 }
 
 module.exports = {
